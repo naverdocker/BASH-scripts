@@ -21,8 +21,7 @@ functioning
 1. index.html   - holds the content that is deployed in the apache-tomcat server hosting path (/opt/apache-tomcat/webapps/ROOT/index.html).
 2. tomcat.sh    - executing this file will automatically install apache-tomcat in the system and deploy default index.html file in the deployment path.
 
-updating the web
-step 1: edit the index.html file        >> vi index.html (or) nano index.html           >> edit         >> save
-step 2: run tomcat.sh                   >> /root/tomcat/tomcat.sh
-step 3: check the browser with IP add   >> http://<public i address>:8080/
-----
+updating web
+step 1: edit the index.html file --> vi index.html --> edit --> save
+step 2: run tomcat.sh --> /root/tomcat/tomcat.sh
+step 3: check the browser with IP add --> <public i address>:8080"
