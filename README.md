@@ -1,7 +1,8 @@
-simple BASH scripts
+simple BASH scripts & linux commands
 
 - to automate simple tasks for convenience
-- simple bash programs
+- simple bash program
+- documents related to linux command line and shell
 
 ----
 
