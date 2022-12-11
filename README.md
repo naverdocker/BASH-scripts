@@ -1,4 +1,7 @@
-BASH scripts to automate simple tasks for convenience
+simple BASH scripts
+
+- to automate simple tasks for convenience
+- simple bash programs
 
 ----
 
