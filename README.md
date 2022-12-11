@@ -1,16 +1,16 @@
 BASH scripts to automate simple tasks for convenience
 
 ----
+
+directory "archived-scripts" contains scripts that are deprecated/obsolete
+
+----
+----
 README instrunction for tomcat.zip
 
-INSTRUCTIONS:
-
 Pre-requaites   - ubuntu / debian operating system
-1. unzip 'tomcat.zip' in the path "/root":
->> cd /root
->> unzip tomcat.zip
-2. if tomcat.zip is unzipped in a different directory, then move the unzipped contents to "/root":
->> mv ./tomcat /root/
+1. unzip 'tomcat.zip' in the path "/root" -- >> cd /root -- >> unzip tomcat.zip
+2. if tomcat.zip is unzipped in a different directory, then move the unzipped contents to "/root" -- >> mv ./tomcat /root/
 
 contents of tomcat.zip
 1. src code     - index.html
