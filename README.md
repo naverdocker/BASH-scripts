@@ -1,7 +1,9 @@
-simple BASH scripts & linux commands
+simple BASH & Python scripts & simple docs related to linux
 
+includes scrips..
 - to automate simple tasks for convenience
-- simple bash program
+- simple bash programi
+- simple python programs
 - documents related to linux command line and shell
 
 ----
