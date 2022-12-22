@@ -1,6 +1,6 @@
 !#/bin/bash
 
-sudo apt update
+sudo apt update 2>/dev/null
 
 if [ $? -eq 0 ]
 then
@@ -18,7 +18,7 @@ then
 	exit
 fi
 
-sudo yum update -y
+sudo yum update -y 2>/dev/null
 
 if [ $? -eq 0 ]
 then
