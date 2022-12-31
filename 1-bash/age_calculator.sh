@@ -1,108 +1,177 @@
 #!/bin/bash
 echo "Please enter your Name"
 read name
+
+
+#Input for birth year
 echo "Enter your birth year (yyyy)"
 read yyyy
-echo "Enter the month you were born (mm)"
+
+if [ ${#yyyy} -ne 4 ] || ! [[ "$yyyy" =~ ^[0-9]+$ ]]
+then
+	echo "INPUT ERROR: only FOUR digit integers are allowed"
+	exit
+fi
+
+
+#Input for birth month
+echo "Enter your month of birth (mm)"
 read mm
-echo "Enter the day of the month you were born (dd)"
+
+if [ ${#mm} -ne 2 ] || ! [[ "$mm" =~ ^[0-9]+$ ]] || [ $mm -eq 0 ]
+then
+	echo "INPUT ERROR: only TWO digit integers greater than zero are allowed"
+	exit
+fi
+if [ $mm -gt 12 ]
+then
+	echo "INPUT ERROR: month value cannot be above 12"
+	exit
+fi
+
+
+#Input for day of month born on
+echo "Enter the day of month you were born (dd)"
 read dd
+
+if [ ${#dd} -ne 2 ] || ! [[ "$dd" =~ ^[0-9]+$ ]] || [ $dd -eq 0 ]
+then
+	echo "INPUT ERROR: only TWO digit integers greater than zero are allowed"
+	exit
+fi
+
+month30="04 06 09 11"
+month31="01 03 05 07 08 10 12"
+
+for item in $month30
+do
+	if [ $mm == $item ]
+	then
+		if [ $dd -ge 30 ]
+		then
+			echo "INPUT ERROR: day value cannot be more than 30 for month $mm"
+			exit
+		fi
+	fi
+done
+
+for item in $month31
+do
+	if [ $mm == $item ]
+	then
+		if [ $dd -ge 31 ]
+		then
+			echo "INPUT ERROR: day value cannot be more than 31 for month $mm"
+			exit
+		fi
+	fi
+done
+
+if [ $mm == 02 ]
+then
+	if [ $dd -ge 29 ]
+	then
+		echo "INPUT ERROR: day value cannot be more than 29 for month $mm"
+		exit
+	fi
+fi
+
+
+#Input for hour of birth
 echo "Enter the hour in which you were born (HH)"
 read HH
+if [ ${#HH} -ne 2 ] || ! [[ "$HH" =~ ^[0-9]+$ ]]
+then
+	echo "INPUT ERROR: only TWO digit integers are allowed"
+	exit
+fi
+
+if [ $HH -ge 23 ]
+then
+	echo "Input Error: hour value cannot be more than 23"
+	exit
+fi
+
+
+#Input for minute of birth
 echo "Enter the minute of the hour you were born (MM)"
 read MM
 
-y=$(date +%Y)
-#m=$(date +%m)
-#d=$(date +%d)
-#H=$(date +%H)
-#M=$(date +%M)
-#j_dob=$(date --date="${yyyy}${mm}${dd}" +%j)
-#j_now=$(date +%j)
+if [ ${#MM} -ne 2 ] || ! [[ "$MM" =~ ^[0-9]+$ ]]
+then
+	echo "INPUT ERROR: only TWO digit integers are allowed"
+	exit
+fi
 
-#years_diff=$(($y-$yyyy))
-#months_diff=$(($m-$mm))
-#days_diff=$(($j_now-$j_dob))
-#hours_diff=$(($H-$HH))
-#minutes_diff=$(($M-$MM))
+if [ $MM -ge 59 ]
+then
+	echo "INPUT ERROR: minute value cannot be more than 59"
+	exit
+fi	
 
-#age_minutes=$(($minutes_diff+$(($hours_diff*60))+$(($days_diff*24*60))+$(($years_diff*365*24*60))))
-
-s_dob=$(date --date "${yyyy:2:4}$mm$dd" +%s)
-
-sec_dob=$(($s_dob+$HH*60*60+$MM*60))
+#calculations
+sec_dob=$(date --date "${yyyy}$mm$dd $HH$MM" +%s)
 sec_now=$(date +%s)
+sleep 1
 
+if [ $sec_dob -ge 0 ]
+then
+	age_seconds=$(($sec_now-$sec_dob))
+else
+	age_seconds=$(($sec_now+$sec_dob))
+fi
 
-#echo $s_dob
-#echo "sec_dob = $sec_dob"
-#echo "sec_now = $sec_now"
-
-age_seconds=$(($sec_now-$sec_dob))
 age_minutes=$(($age_seconds/60))
 age_hours=$(($age_minutes/60))
 age_days=$(($age_hours/24))
 age_years=$(($age_days/365))
 
-#echo "age_seconds = $age_seconds"
 echo " "
 sleep 1
 echo "Hi, $name"
 sleep 1
 echo " "
 
-#if [  expr length "$mm" -ne 2 || expr length "$dd" -ne 2 || expr length "$HH" -ne 2 || expr length "$MM" -ne 2  ]
-#then
-#	echo "wrong format input"
-#        sleep 1
-#	echo "please make sure you enter details in yyyy, mm, dd, HH, SS format"
-#if
-
-
-if [  $(($yyyy-$y)) -ge 100  ]
-then
-	sleep 1
-	echo "You are not born yet!!"
-	sleep 2
-	echo "please wait for another century or more"
-	exit
-fi
-
-if [  $(($yyyy-$y)) -le -100  ]
-then
-	sleep 1
-	echo "It has been more a century or more since you were born!!"
-	sleep 2
-	echo "bye bye"
-	exit
-fi
-
 if [  $age_seconds -gt 60  ]
 then
-        sleep 2
-	echo "your age in seconds = $age_seconds"
-       	sleep 2
-	echo "and it has been $age_minutes minutes since you were born"
-	sleep 2
-	echo "in hours, you are $age_hours"
-	sleep 2
-	echo "and you are $age_days days old"
-	sleep 2
-	echo "So, you are around $age_years years old"
+        sleep 1
+	echo "you are $age_seconds seconds old"
+	echo " "
+       	sleep 1
+	echo "your age in minutes: $age_minutes"
+	echo " "
+	sleep 1
+	echo "your age in hours: $age_hours"
+	echo " "
+	sleep 1
+	echo "your age in days: $age_days"
+	echo " "
+	sleep 1
+	echo "your age in years: $age_years"
+	echo " "
 elif [  $age_seconds -lt 0  ]
 then
-        sleep 2
+        sleep 1
 	echo "You are not born yet!!!"
-	sleep 2
+	echo " "
+	sleep 1
 	echo "you will be born in $((0-$age_seconds)) seconds"
-	sleep 2
+	echo " "
+	sleep 1
 	echo "please wait for another $((0-$age_minutes)) minutes"
-	sleep 2
+	echo " "
+	sleep 1
+	echo "which is $((0-$age_hours)) hours OR $((0-$age_days)) days OR $((0-$age_years)) years"
+	echo " "
+	sleep 1
 	echo "hope you have a good time"
+	echo " "
 else
 	sleep 1
 	echo "CONGATULATION!!! YOU ARE JUST BORN!!!"
-	sleep 2
+	echo " "
+	sleep 1
 	echo "Welcome abroad '$name'"
+	echo " "
 fi
-sleep 2
+sleep 1
