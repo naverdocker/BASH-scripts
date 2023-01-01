@@ -1,14 +1,14 @@
 ## bash-py repo 
-### - simple programs/scripts and other misc docs
+#### contains simple programs/scripts and some misc docs
 
 *keywords: linux, bash, python.* 
 
-**contents:**
+#### **Contents:**
 - simple programs for learning purpose
 - simple scripts to automate tasks
 - documents related to linux
 
-**languages featured:**
+#### **Languages featured:**
 - BASH		- since 19-OCT-2022
 - Python	- since 15-DEC-2022
 
