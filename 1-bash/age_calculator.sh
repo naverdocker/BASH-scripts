@@ -47,7 +47,7 @@ for item in $month30
 do
 	if [ $mm == $item ]
 	then
-		if [ $dd -ge 30 ]
+		if [ $dd -gt 30 ]
 		then
 			echo "INPUT ERROR: day value cannot be more than 30 for month $mm"
 			exit
@@ -59,7 +59,7 @@ for item in $month31
 do
 	if [ $mm == $item ]
 	then
-		if [ $dd -ge 31 ]
+		if [ $dd -gt 31 ]
 		then
 			echo "INPUT ERROR: day value cannot be more than 31 for month $mm"
 			exit
@@ -124,7 +124,7 @@ fi
 age_minutes=$(($age_seconds/60))
 age_hours=$(($age_minutes/60))
 age_days=$(($age_hours/24))
-age_years=$(($age_days/365))
+age_years=$(($age_days/$((36524/100))))
 
 echo " "
 sleep 1
